@@ -1,0 +1,32 @@
+#!/bin/bash
+# Backwards support for remastersys
+#
+# This software is part of the relinux suite
+#
+# Joel Leclerc
+
+if [[ "$1" == "clean" ]]
+then
+  relinux fullclean
+  exit $?
+fi
+if [[ "$1" == "dist" ]]
+then
+  if [ $# -lt 2 ]
+  then
+    relinux iso
+    exit $?
+  fi
+  if [[ "$2" == "cdfs" ]]
+  then
+    relinux squashfs
+    exit $?
+  fi
+  if [[ "$2" == "iso" ]]
+  then
+    relinux onlyiso
+    exit $?
+  fi
+fi
+echo "Unrecognized option: $@"
+exit 1
